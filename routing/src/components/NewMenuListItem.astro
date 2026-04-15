@@ -1,0 +1,16 @@
+---
+
+interface Props {
+    id: number;
+    name: string;
+    price: number;
+}
+
+const { id, name } = Astro.props;
+const path = `/newMenus/${id}`;
+
+---
+
+<li>
+    <a href={path}>{name}</a>
+</li>
