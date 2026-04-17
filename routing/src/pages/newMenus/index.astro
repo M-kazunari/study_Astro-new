@@ -1,4 +1,6 @@
 ---
+import NewMenuListItem from "../../components/NewMenuListItem.astro";
+
 interface Menu {
     id: number;
     name: string;
@@ -24,7 +26,16 @@ const newMenuList: Menu[] = [
         <h1>ルーティング</h1>
         <h2>新着メニュー一覧</h2>
         <section>
-            <!-- 後からコードを挿入 -->
+            <ul>
+                {
+                    newMenuList.map(item => (
+                        <NewMenuListItem 
+                            id={item.id} 
+                            name={item.name} 
+                            price={item.price} />
+                    ))
+                }
+            </ul>
         </section>
         <a href="/">TOPへ</a>
 	</body>

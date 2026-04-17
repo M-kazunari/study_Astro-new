@@ -1,0 +1,44 @@
+---
+export function getStaticPaths() {
+    return [
+        {params: {menuId: "22345"}},
+        {params: {menuId: "12345"}},
+    ];
+}
+
+interface Menu {
+    id: number;
+    name: string;
+    price: number;
+}
+
+const newMenuList: Map<number, Menu> = new Map();
+newMenuList.set(12345, {id: 12345, name: "Pizza", price: 10});
+newMenuList.set(22345, {id: 22345, name: "Burger", price: 8});
+
+const {menuId} = Astro.params;
+const newMenuItem = newMenuList.get(Number(menuId));
+
+---
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{newMenuItem?.name} | ルーティング</title>
+</head>
+<body>
+    <h1>ルーティング</h1>
+    <h2>新着メニュー</h2>
+    <section>
+        <h3>{newMenuItem?.name}</h3>
+        <p>
+            新しいメニューである{newMenuItem?.name}は、いかがですか？？<br>
+            金額は、{newMenuItem?.price}です！
+        </p>
+    </section>
+    <a href="/newMenus">新着メニューへ戻る</a>
+</body>
+</html>
