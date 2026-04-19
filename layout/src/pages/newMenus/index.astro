@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewMenuListItem from "../../components/NewMenuListItem.astro";
+import { newMenuArray } from "../../dataFactory";
+import type { $brand } from "astro:schema";
+---
+
+<BaseLayout subTitle="新着メニュー一覧|">
+    <h2>新着メニュー一覧</h2>
+    <section>
+        <ul>
+            {
+                newMenuArray.map((item) => {
+                    return <NewMenuListItem menu={item} />;
+                })
+            }
+        </ul>
+    </section>
+</BaseLayout>

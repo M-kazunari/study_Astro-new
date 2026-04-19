@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { newMenuArray, newMenuList } from "../../dataFactory";
+
+interface ReturnArrayItem {
+    params: {
+        menuId: string;
+    };
+}
+export function getStaticPaths() {
+    const returnArray: ReturnArrayItem[] = [];
+    newMenuList.forEach((value, key, map) => {
+        returnArray.push({ params: { menuId: String(key) } });
+    });
+    return returnArray;
+}
+
+const { menuId } = Astro.params;
+
+const newMenuItem = newMenuList.get(Number(menuId));
+
+const subTitle = `${newMenuItem?.name}|`;
+---
+
+<BaseLayout subTitle={subTitle}>
+    <h2>新着メニュー</h2>
+    <section>
+        <h3>{newMenuItem?.name}</h3>
+        <p>
+            新しいメニューである{newMenuItem?.name}はいかがですか？？<br />
+            金額は{newMenuItem?.price}です。
+        </p>
+    </section>
+    <a href="/newMenus">新着メニューへ</a>
+</BaseLayout>
