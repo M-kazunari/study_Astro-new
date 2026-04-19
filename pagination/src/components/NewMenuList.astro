@@ -1,0 +1,14 @@
+---
+import type { Menu } from "../interfaces";
+
+interface Props {
+    menu: Menu;
+}
+
+const { menu } = Astro.props;
+const path = `/newMenus/${menu.id}`;
+---
+
+<li>
+    <a href={path}>{menu.name}</a>
+</li>
